@@ -1,0 +1,16 @@
+Package: CopyNeutralIMA
+Title: Reference samples for analysis of Infinium Methylation450k arrays.
+Version: 0.0.0.9000
+Authors@R: c(person("Moritz", "Przybilla", email = "m.przybilla@dkfz-heidelberg.de", role = "aut"), person("Xavier", "Pastor Hostench", email = "x.pastorhostench@dkfz-heidelberg.de", role = c("aut", "cre")))
+Description: In this package we provide a set of 42 Infinium Methylation450k control samples. The provided controls constist of material from healthy patients with nominally no copy number abberations. Users of conumee or other copy number profiling packages may use this data package to complement their analysis.
+Depends: R (>= 3.4.2)
+License: CC0
+Encoding: UTF-8
+LazyData: true
+biocViews: ExperimentData,Homo_sapiens_Data,MicroarrayData,TwoChannelData,MethylationArrayData,GEO
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
+#Imports: Rdpack
+#RdMacros: Rdpack
