@@ -1,16 +1,17 @@
 Package: CopyNeutralIMA
-Title: Reference samples for analysis of Infinium Methylation450k arrays.
-Version: 0.0.0.9000
-Authors@R: c(person("Moritz", "Przybilla", email = "m.przybilla@dkfz-heidelberg.de", role = "aut"), person("Xavier", "Pastor Hostench", email = "x.pastorhostench@dkfz-heidelberg.de", role = c("aut", "cre")))
-Description: In this package we provide a set of 42 Infinium Methylation450k control samples. The provided controls constist of material from healthy patients with nominally no copy number abberations. Users of conumee or other copy number profiling packages may use this data package to complement their analysis.
-Depends: R (>= 3.4.2)
-License: CC0
+Title: Copy Neutral Illumina Methylation Arrays
+Version: 0.99.1
+Authors@R: c(person("Xavier", "Pastor Hostench", email = "copyneutralima@compbio-dev.com", role = c("aut", "cre")), person("Moritz", "Przybilla", role = "aut"))
+Description: Provides a set of genomic copy neutral samples hybridized using Illumina Methylation arrays (450k and EPIC).
+Depends: R (>= 3.5.0)
+License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
-biocViews: ExperimentData,Homo_sapiens_Data,MicroarrayData,TwoChannelData,MethylationArrayData,GEO
-Suggests: knitr,
-    rmarkdown
+biocViews: ExperimentData,Homo_sapiens_Data,MicroarrayData,TwoChannelData,MethylationArrayData,GEO.
+Imports: ExperimentHub,Rdpack (>= 0.8-3)
+Suggests: BiocStyle,knitr,rmarkdown,minfi,conumee
+RdMacros: Rdpack
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
-#Imports: Rdpack
-#RdMacros: Rdpack
+NeedsCompilation: no
+Packaged: 2018-07-06 12:57:09 UTC; pastor

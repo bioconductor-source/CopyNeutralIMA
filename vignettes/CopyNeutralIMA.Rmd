@@ -1,9 +1,28 @@
 ---
-title: "The CopyNeutralIMA vignette."
-author: "Moritz Przybilla, Xavier Pastor Hostench (Computational Oncology, German Cancer Research Center, Heidelberg, Germany)"
+title: "CopyNeutralIMA"
+author:
+  - name: Moritz Przybilla
+    affiliation:
+    - &dkfz Division of Theoretical Bioinformatics, German Cancer Research Center (DKFZ), Heidelberg, Germany
+  - name: Xavier Pastor
+    affiliation:
+    - Heidelberg Center for Personalized Oncology (DKFZ-HIPO), Heidelberg, Germany
+    - *dkfz
+    email: xavier.pastor@compbio-dev.com
+
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-bibliography: REFERENCES.bib
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+  github_document:
+    output_file: ../README.md
+    toc: true
+    toc_float: true
+    number_sections: true
+link-citations: true
+bibliography: ../inst/REFERENCES.bib
 vignette: >
   %\VignetteIndexEntry{CopyNeutralIMA}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,57 +37,51 @@ text-align: justify}
 knitr::opts_chunk$set(collapse=TRUE, comment='#>')
 ```
 
-# Contents 
-1. Introduction
-1. Description
-1. Data
-1. Example 
+# Overview
+*CopyNeutralIMA* provides reference samples for performing copy-number variation (CNV) analysis using Illumina Infinium 450k or EPIC DNA methylation arrays. 
+There is a number of R/Bioconductor packages that do genomic copy number profiling, including [*conumee*](http://bioconductor.org/packages/release/bioc/html/conumee.html) [@conumee], [*ChAMP*](http://bioconductor.org/packages/release/bioc/html/ChAMP.html) [@champ] or *CopyNumber450k*, now deprecated. In order to extract information about the copy number alterations, a set of copy neutral samples is required as a reference. The package *CopyNumber450kData*, usually used to provide the reference, is no longer available. Additionally, there has never been an effort to provide reference samples for the EPIC arrays. To fill this gap of lacking reference samples, we here introduce the *CopyNeutralIMA* package. 
 
-## 1. Overview
-This document presents an overview of the *CopyNeutralIMA* package. The *CopyNeutralIMA* package provides reference samples for perfomring copy-number variation (CNV) analysis using Ilumina Infinium 450k or EPIC DNA methylation arrays. Several R bioconductor packages do genomic copy number profiling, including *conumee*, *ChAMP* or *CopyNumber450k* (deprecated). In order to achieve information about the copy number alterations, a set of copy neutral samples is required as a reference. The package *CopyNumber450kData*, usually used to provide the reference, is now deprecated. Additionally, there has never been an effort to provide reference samples for the EPIC arrays. To fill this gap of lacking reference samples, we here introduce the *CopyNeutralIMA* package. 
+# Description
 
-## 2. Description
+In this package we provide a set of 51 IlluminaHumanMethylation450k and 13 IlluminaHumanMethylationEPIC samples. The provided samples consist of material from healthy individuals with nominally no copy number aberrations. Users of *conumee* or other copy number profiling packages may use this data package as reference genomes.
 
-In this package we provide a set of 51 InfiniumHumanMethylation450k and 13 InfiniumHumanMethylationEPIC samples. The provided samples constist of material from healthy individuals with nominally no copy number abberations. Users of *conumee* or other copy number profiling packages may use this data package as reference genomes.
+# Data
 
-## 3. Data
+We selected the data from different studies accessible in the [Gene Expression Omnibus (GEO)](https://www.ncbi.nlm.nih.gov/geo/). In particular, for 450k arrays samples from [GSE49618](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE49618) [@GSE49618], [GSE61441](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE61441) [@GSE61441] and [GSE106089](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106089) [@GSE106089] were chosen. For EPIC arrays, normal or control samples from series [GSE86831](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE86831)/[GSE86833](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE86833) [@GSE86831], [GSE98990](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE98990) [@GSE98990] and [GSE100825](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE100825) [@GSE100825] were chosen.
 
-We selected the data from different studies accessible in the Gene Expression Omnibus. In particular, for 450k arrays samples from **GSE49618**, **GSE61441** and **GSE106089** were chosen. For EPIC arrays, normal or control samples from series **GSE86831/GSE86833**, **GSE98990** and **GSE100825** were chosen. The data can be found at [GEO](https://www.ncbi.nlm.nih.gov/geo/) using the respective identifier. 
+# Example with *conumee*
 
-## 4. Example using *CopyNeutralIMA* in combination with *conumee*
+First, we load the data we want to analyse and rename it. To make it easier we will use the same example as in the *conumee* package.
 
-First, we load the data we want to analyse. To make it easier we will use the same example as in the **conumee** package.
-
-```{r}
+```{r read_tcga, message=F, warning=F}
 library(minfi)
 library(conumee)
 
 RGSetTCGA <- read.450k.url()
+# Renaming of the samples
+data(tcgaBRCA.sentrix2name)
+sampleNames(RGSetTCGA) <- tcgaBRCA.sentrix2name[sampleNames(RGSetTCGA)]
 RGSetTCGA
 ```
 
 After loading the data we normalize it:
-```{r}
+```{r normalize_tcga}
 MSetTCGA <- preprocessIllumina(RGSetTCGA)
-data(tcgaBRCA.sentrix2name)
-```
-
-We rename the samples with the known identifiers:
-```{r}
-sampleNames(MSetTCGA) <- tcgaBRCA.sentrix2name[sampleNames(MSetTCGA)]
 MSetTCGA
 ```
 
 Now we load our control samples, from the same array type as our test samples and normalize them:
-```{r}
+```{r prepare_controls, message=F}
+library(CopyNeutralIMA)
 ima <- annotation(MSetTCGA)[['array']]
 RGSetCtrl <- getCopyNeutralRGSet(ima)
-# preprocess CopyNeutral450k with minfi
+# preprocess as with the sample data
 MSetCtrl <- preprocessIllumina(RGSetCtrl)
+MSetCtrl
 ```
 
 Finally we can run the conumee analysis following the author's indications:
-```{r}
+```{r conumee}
 # use the information provided by conumee to create annotation files or define them according to the package instructions
 data(exclude_regions)
 data(detail_regions)
@@ -78,20 +91,27 @@ anno <- CNV.create_anno(array_type = "450k", exclude_regions = exclude_regions, 
 control.data <- CNV.load(MSetCtrl)
 tcga.data <- CNV.load(MSetTCGA)
 
-x <- CNV.fit(tcga.data["TCGA-AR-A1AU-01A-11D-A12R-05"], control.data, anno)
-x <- CNV.bin(x)
-x <- CNV.detail(x)
-x <- CNV.segment(x)
-x
+cnv <- CNV.fit(tcga.data["TCGA-AR-A1AU-01A-11D-A12R-05"], control.data, anno)
+cnv <- CNV.bin(cnv)
+cnv <- CNV.detail(cnv)
+cnv <- CNV.segment(cnv)
+cnv
 
-CNV.genomeplot(x)
-CNV.genomeplot(x, chr = 'chr6')
+CNV.genomeplot(cnv)
+CNV.genomeplot(cnv, chr = 'chr6')
 
-head(CNV.write(x, what = 'segments'), n = 5)
-head(CNV.write(x, what='probes'), n = 5)
+head(CNV.write(cnv, what = 'segments'))
+head(CNV.write(cnv, what='probes'))
+```
+
+---
+nocite: |
+  @minfi
+...
+
+# Session info {.unnumbered}
+```{r session_info, echo = F}
+sessionInfo()
 ```
 
 # References
-
-#\bibliographystyle{plain}
-#\bibliography{../inst/REFERENCES}

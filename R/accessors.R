@@ -1,8 +1,11 @@
 #' Accessor to the data objects.
 #'
-#' @param ima a character string identifying for which array type retrieve data. Valid values are 'IlluminaHumanMethylation450k' and 'IlluminaHumanMethylationEPIC'.
+#' getCopyNeutralRGSet simplifies the access to the data of the package in ExperimentHub. The allowed values matched of those in the array definition of the RGChannelSet objects from package 'minfi'.
+#' If 'ima' is set to 'IlluminaHumanMethylation450k' it will return the object with index 'EH1453' in ExperimentHub; if set to 'IlluminaHumanMethylationEPIC' it will return the object with index 'EH1454'.
 #'
-#' @return A RGChannelSetExtended object
+#' @param ima a character string specifying for which array type to retrieve data. Valid values are 'IlluminaHumanMethylation450k' and 'IlluminaHumanMethylationEPIC'.
+#'
+#' @return A \code{\link[minfi]{RGChannelSet-class}} object
 #'
 #' @export
 #' 
@@ -11,14 +14,11 @@
 #' @examples
 #' rgset_450k <- getCopyNeutralRGSet('IlluminaHumanMethylation450k')
 #' rgset_450k
-getCopyNeutralRGSet <- function(ima)
+getCopyNeutralRGSet <- function(ima=c('IlluminaHumanMethylation450k', 'IlluminaHumanMethylationEPIC'))
 {
-	valid <- c(paste0('IlluminaHumanMethylation', c('450k', 'EPIC')))
-	if (! ima %in% valid)
-		stop(paste('Valid array types are:', paste(valid, collapse=', ')))
-	library(ExperimentHub)
+    ima <- match.arg(ima)
 	eh <- ExperimentHub()
-	# load the reference dataset provided by the CopyNeutral450k package
+	# load the reference dataset
 	rgset <- loadResources(eh, package='CopyNeutralIMA', filterBy=ima)
-	return(rgset)
+	return(rgset[[1]])
 }
