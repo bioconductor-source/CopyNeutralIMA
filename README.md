@@ -1,8 +1,3 @@
-<style>
-body {
-text-align: justify}
-</style>
-
 # Overview
 
 *CopyNeutralIMA* provides reference samples for performing copy-number
@@ -167,13 +162,13 @@ cnv
 CNV.genomeplot(cnv)
 ```
 
-![](/home/pastor/projects/packages/CopyNeutralIMA/README_files/figure-gfm/conumee-1.png)<!-- -->
+![](README_files/figure-gfm/conumee-1.png)<!-- -->
 
 ``` r
 CNV.genomeplot(cnv, chr = 'chr6')
 ```
 
-![](/home/pastor/projects/packages/CopyNeutralIMA/README_files/figure-gfm/conumee-2.png)<!-- -->
+![](README_files/figure-gfm/conumee-2.png)<!-- -->
 
 ``` r
 
