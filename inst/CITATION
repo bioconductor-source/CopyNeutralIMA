@@ -1,0 +1,6 @@
+manual{cnima,
+  title = {{CopyNeutralIMA: Genomic Copy Neutral samples for Illumina Methylation arrays.}},
+  author = "Przybilla, Moritz and Pastor, Xavier",
+  address = "Heidelberg Center for Personalized Oncology (DKFZ-HIPO) and Division of Theoretical Bioinformatics, German Cancer Research Center (DKFZ), Heidelberg, Germany",
+  year = "2018"
+}
