@@ -8,14 +8,20 @@ getCopyNeutralRGSet(ima = c("IlluminaHumanMethylation450k",
   "IlluminaHumanMethylationEPIC"))
 }
 \arguments{
-\item{ima}{a character string specifying for which array type to retrieve data. Valid values are 'IlluminaHumanMethylation450k' and 'IlluminaHumanMethylationEPIC'.}
+\item{ima}{a character string specifying for which array type to retrieve
+data. Valid values are 'IlluminaHumanMethylation450k' and 
+'IlluminaHumanMethylationEPIC'.}
 }
 \value{
 A \code{\link[minfi]{RGChannelSet-class}} object
 }
 \description{
-getCopyNeutralRGSet simplifies the access to the data of the package in ExperimentHub. The allowed values matched of those in the array definition of the RGChannelSet objects from package 'minfi'.
-If 'ima' is set to 'IlluminaHumanMethylation450k' it will return the object with index 'EH1453' in ExperimentHub; if set to 'IlluminaHumanMethylationEPIC' it will return the object with index 'EH1454'.
+igetCopyNeutralRGSet simplifies the access to the data of the package in
+ExperimentHub. The allowed values matched of those in the array definition of
+the RGChannelSet objects from package 'minfi'.
+If 'ima' is set to 'IlluminaHumanMethylation450k' it will return the object
+with index 'EH1453' in ExperimentHub; if set to
+'IlluminaHumanMethylationEPIC' it will return the object with index 'EH1454'.
 }
 \examples{
 rgset_450k <- getCopyNeutralRGSet('IlluminaHumanMethylation450k')

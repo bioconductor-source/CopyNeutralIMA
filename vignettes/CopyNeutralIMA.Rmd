@@ -106,7 +106,7 @@ head(CNV.write(cnv, what='probes'))
 
 ---
 nocite: |
-  @minfi
+    @minfi
 ...
 
 # Session info {.unnumbered}

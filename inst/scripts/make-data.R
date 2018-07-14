@@ -52,7 +52,7 @@ make_GEO_RGSet <- function(gsm, pdata, tmpdir) {
 	sapply(idat, gunzip, overwrite = TRUE)
 
 	## RGChannelSet for data from Infinium Methlyation450k
-	rgset <- read.metharray.exp(tmpdir, targets=NULL, recursive=T, extended=T)
+	rgset <- read.metharray.exp(tmpdir, targets=NULL, recursive=TRUE, extended=TRUE)
 	smplNames <- gsub('_.*', '', sampleNames(rgset))
 	sampleNames(rgset) <- smplNames
 	pData(rgset) <- DataFrame(pdata)

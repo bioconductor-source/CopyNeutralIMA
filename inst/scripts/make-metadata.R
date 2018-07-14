@@ -12,7 +12,7 @@ meta <- data.frame(
   TaxonomyId = rep(9606,2),
   Coordinate_1_based = rep(TRUE,2),
   DataProvider = rep("GEO",2),
-  Maintainer = rep("copyneutralima@compbio-dev.com",2),
+  Maintainer = rep("xavier.pastor@compbio-dev.com",2),
   RDataClass = rep("RGChannelSetExtended",2),
   DispatchClass = rep("Rda",2),
   RDataPath = file.path("CopyNeutralIMA/data", c("IlluminaHumanMethylation450k.rda","IlluminaHumanMethylationEPIC.rda"))
