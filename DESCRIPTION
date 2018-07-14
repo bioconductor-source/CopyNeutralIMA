@@ -1,6 +1,6 @@
 Package: CopyNeutralIMA
 Title: Copy Neutral Illumina Methylation Arrays
-Version: 0.99.5
+Version: 0.99.6
 Authors@R: c(person("Xavier", "Pastor Hostench", email = "xavier.pastor@compbio-dev.com", role = c("aut", "cre")), person("Moritz", "Przybilla", role = "aut"))
 Description: Provides a set of genomic copy neutral samples hybridized using Illumina Methylation arrays (450k and EPIC).
 Depends: R (>= 3.5.0)
