@@ -99,7 +99,7 @@ cnv <- CNV.segment(cnv)
 cnv
 
 CNV.genomeplot(cnv)
-CNV.genomeplot(cnv, chr = 'chr6')
+CNV.genomeplot(cnv, chr = 'chr18')
 
 head(CNV.write(cnv, what = 'segments'))
 head(CNV.write(cnv, what='probes'))

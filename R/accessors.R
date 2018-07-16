@@ -20,7 +20,8 @@
 #' @examples
 #' rgset_450k <- getCopyNeutralRGSet('IlluminaHumanMethylation450k')
 #' rgset_450k
-getCopyNeutralRGSet <- function(ima=c('IlluminaHumanMethylation450k', 'IlluminaHumanMethylationEPIC'))
+getCopyNeutralRGSet <- function(ima=c('IlluminaHumanMethylation450k',
+                                      'IlluminaHumanMethylationEPIC'))
 {
     ima <- match.arg(ima)
     eh <- ExperimentHub()

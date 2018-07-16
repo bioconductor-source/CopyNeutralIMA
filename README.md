@@ -150,7 +150,7 @@ cnv <- CNV.detail(cnv)
 cnv <- CNV.segment(cnv)
 cnv
 #> CNV analysis object
-#>    created   : Mon Jul 16 10:11:11 2018
+#>    created   : Mon Jul 16 13:51:30 2018
 #>   @name      : GroupB_1
 #>   @anno      : 22 chromosomes, 470870 probes, 15820 bins
 #>   @fit       : available (noise: 2.32)
@@ -164,7 +164,7 @@ CNV.genomeplot(cnv)
 ![](README_files/figure-gfm/conumee-1.png)<!-- -->
 
 ``` r
-CNV.genomeplot(cnv, chr = 'chr6')
+CNV.genomeplot(cnv, chr = 'chr18')
 ```
 
 ![](README_files/figure-gfm/conumee-2.png)<!-- -->
