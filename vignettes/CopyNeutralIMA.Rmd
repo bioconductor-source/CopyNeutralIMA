@@ -56,28 +56,29 @@ First, we load the data we want to analyse and rename it. To make it easier we w
 ```{r read_tcga, message=F, warning=F}
 library(minfi)
 library(conumee)
+library(minfiData)
 
-RGSetTCGA <- read.450k.url()
-# Renaming of the samples
-data(tcgaBRCA.sentrix2name)
-sampleNames(RGSetTCGA) <- tcgaBRCA.sentrix2name[sampleNames(RGSetTCGA)]
-RGSetTCGA
+data(RGsetEx)
+sampleNames(RGsetEx) <- pData(RGsetEx)$Sample_Name
+cancer <- pData(RGsetEx)$status == 'cancer'
+RGsetEx <- RGsetEx[,cancer]
+RGsetEx
 ```
 
 After loading the data we normalize it:
 ```{r normalize_tcga}
-MSetTCGA <- preprocessIllumina(RGSetTCGA)
-MSetTCGA
+MsetEx <- preprocessIllumina(RGsetEx)
+MsetEx
 ```
 
 Now we load our control samples, from the same array type as our test samples and normalize them:
 ```{r prepare_controls, message=F}
 library(CopyNeutralIMA)
-ima <- annotation(MSetTCGA)[['array']]
-RGSetCtrl <- getCopyNeutralRGSet(ima)
+ima <- annotation(MsetEx)[['array']]
+RGsetCtrl <- getCopyNeutralRGSet(ima)
 # preprocess as with the sample data
-MSetCtrl <- preprocessIllumina(RGSetCtrl)
-MSetCtrl
+MsetCtrl <- preprocessIllumina(RGsetCtrl)
+MsetCtrl
 ```
 
 Finally we can run the conumee analysis following the author's indications:
@@ -88,10 +89,10 @@ data(detail_regions)
 anno <- CNV.create_anno(array_type = "450k", exclude_regions = exclude_regions, detail_regions = detail_regions)
 
 # load in the data from the reference and samples to be analyzed
-control.data <- CNV.load(MSetCtrl)
-tcga.data <- CNV.load(MSetTCGA)
+control.data <- CNV.load(MsetCtrl)
+ex.data <- CNV.load(MsetEx)
 
-cnv <- CNV.fit(tcga.data["TCGA-AR-A1AU-01A-11D-A12R-05"], control.data, anno)
+cnv <- CNV.fit(ex.data["GroupB_1"], control.data, anno)
 cnv <- CNV.bin(cnv)
 cnv <- CNV.detail(cnv)
 cnv <- CNV.segment(cnv)
