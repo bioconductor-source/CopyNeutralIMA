@@ -51,7 +51,7 @@ We selected the data from different studies accessible in the [Gene Expression O
 
 # Example with *conumee*
 
-First, we load the data we want to analyse and rename it. To make it easier we will use the same example as in the *conumee* package.
+First, we load the data we want to analyse and rename it. We will use the examples provided by the [*minfiData*](https://bioconductor.org/packages/release/data/experiment/html/minfiData.html) [@minfiData] package and will follow the steps described in the vignette of *conumee*.
 
 ```{r read_tcga, message=F, warning=F}
 library(minfi)
@@ -83,7 +83,8 @@ MsetCtrl
 
 Finally we can run the conumee analysis following the author's indications:
 ```{r conumee}
-# use the information provided by conumee to create annotation files or define them according to the package instructions
+# use the information provided by conumee to create annotation files or define
+# them according to the package instructions
 data(exclude_regions)
 data(detail_regions)
 anno <- CNV.create_anno(array_type = "450k", exclude_regions = exclude_regions, detail_regions = detail_regions)
