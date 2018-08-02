@@ -45,8 +45,11 @@ normal or control samples from series
 
 # Example with *conumee*
 
-First, we load the data we want to analyse and rename it. To make it
-easier we will use the same example as in the *conumee* package.
+First, we load the data we want to analyse and rename it. We will use
+the examples provided by the
+[*minfiData*](https://bioconductor.org/packages/release/data/experiment/html/minfiData.html)
+(Daniel, Aryee, and Timp [2018](#ref-minfiData)) package and will follow
+the steps described in the vignette of *conumee*.
 
 ``` r
 library(minfi)
@@ -126,7 +129,8 @@ Finally we can run the conumee analysis following the author’s
 indications:
 
 ``` r
-# use the information provided by conumee to create annotation files or define them according to the package instructions
+# use the information provided by conumee to create annotation files or define
+# them according to the package instructions
 data(exclude_regions)
 data(detail_regions)
 anno <- CNV.create_anno(array_type = "450k", exclude_regions = exclude_regions, detail_regions = detail_regions)
@@ -150,13 +154,13 @@ cnv <- CNV.detail(cnv)
 cnv <- CNV.segment(cnv)
 cnv
 #> CNV analysis object
-#>    created   : Mon Jul 16 13:51:30 2018
+#>    created   : Thu Aug  2 22:26:23 2018
 #>   @name      : GroupB_1
 #>   @anno      : 22 chromosomes, 470870 probes, 15820 bins
 #>   @fit       : available (noise: 2.32)
 #>   @bin       : available (shift: 0.005)
 #>   @detail    : available (20 regions)
-#>   @seg       : available (27 segments)
+#>   @seg       : available (29 segments)
 
 CNV.genomeplot(cnv)
 ```
@@ -172,20 +176,20 @@ CNV.genomeplot(cnv, chr = 'chr18')
 ``` r
 
 head(CNV.write(cnv, what = 'segments'))
-#>         ID chrom loc.start   loc.end num.mark    bstat          pval
-#> 1 GroupB_1  chr1    635684 148927230      931 21.47571  1.422312e-99
-#> 2 GroupB_1  chr1 149077230 149379823        5 26.04475 7.787661e-147
-#> 3 GroupB_1  chr1 149579823 249195311      657       NA            NA
-#> 4 GroupB_1 chr10    105000 135462374      840       NA            NA
-#> 5 GroupB_1 chr11    130000 134873258      914       NA            NA
-#> 6 GroupB_1 chr12    172870 133770948      848       NA            NA
+#>         ID chrom loc.start   loc.end num.mark     bstat          pval
+#> 1 GroupB_1  chr1    635684 148927230      931 21.475711  1.422312e-99
+#> 2 GroupB_1  chr1 149077230 149379823        5 26.044755 7.787661e-147
+#> 3 GroupB_1  chr1 149579823 249195311      657        NA            NA
+#> 4 GroupB_1 chr10    105000 135462374      840        NA            NA
+#> 5 GroupB_1 chr11    130000 134873258      914        NA            NA
+#> 6 GroupB_1 chr12    172870  65175000      413  8.802509  1.958883e-16
 #>   seg.mean seg.median
 #> 1   -0.194     -0.180
 #> 2    3.058      0.621
 #> 3   -0.077     -0.070
 #> 4   -0.054     -0.050
 #> 5    0.081      0.068
-#> 6   -0.030     -0.034
+#> 6   -0.006     -0.015
 head(CNV.write(cnv, what='probes'))
 #>   Chromosome Start   End    Feature GroupB_1
 #> 1       chr1 15864 15865 cg13869341   -0.064
@@ -219,85 +223,83 @@ head(CNV.write(cnv, what='probes'))
     #> [8] methods   base     
     #> 
     #> other attached packages:
-    #>  [1] minfiData_0.27.0                                   
-    #>  [2] conumee_1.15.0                                     
-    #>  [3] IlluminaHumanMethylationEPICmanifest_0.3.0         
-    #>  [4] IlluminaHumanMethylationEPICanno.ilm10b2.hg19_0.6.0
-    #>  [5] IlluminaHumanMethylation450kmanifest_0.4.0         
-    #>  [6] IlluminaHumanMethylation450kanno.ilmn12.hg19_0.6.0 
-    #>  [7] minfi_1.27.5                                       
-    #>  [8] bumphunter_1.23.0                                  
-    #>  [9] locfit_1.5-9.1                                     
-    #> [10] iterators_1.0.10                                   
-    #> [11] foreach_1.4.4                                      
-    #> [12] Biostrings_2.49.0                                  
-    #> [13] XVector_0.21.3                                     
-    #> [14] SummarizedExperiment_1.11.5                        
-    #> [15] DelayedArray_0.7.19                                
-    #> [16] BiocParallel_1.15.7                                
-    #> [17] matrixStats_0.53.1                                 
-    #> [18] Biobase_2.40.0                                     
-    #> [19] GenomicRanges_1.33.7                               
-    #> [20] GenomeInfoDb_1.17.1                                
-    #> [21] IRanges_2.15.14                                    
-    #> [22] S4Vectors_0.19.17                                  
-    #> [23] BiocGenerics_0.27.1                                
-    #> [24] CopyNeutralIMA_0.99.7                              
+    #>  [1] CopyNeutralIMA_0.99.9                              
+    #>  [2] minfiData_0.27.0                                   
+    #>  [3] conumee_1.15.0                                     
+    #>  [4] IlluminaHumanMethylationEPICmanifest_0.3.0         
+    #>  [5] IlluminaHumanMethylationEPICanno.ilm10b2.hg19_0.6.0
+    #>  [6] IlluminaHumanMethylation450kmanifest_0.4.0         
+    #>  [7] IlluminaHumanMethylation450kanno.ilmn12.hg19_0.6.0 
+    #>  [8] minfi_1.27.5                                       
+    #>  [9] bumphunter_1.23.0                                  
+    #> [10] locfit_1.5-9.1                                     
+    #> [11] iterators_1.0.10                                   
+    #> [12] foreach_1.4.4                                      
+    #> [13] Biostrings_2.49.0                                  
+    #> [14] XVector_0.21.3                                     
+    #> [15] SummarizedExperiment_1.11.6                        
+    #> [16] DelayedArray_0.7.22                                
+    #> [17] BiocParallel_1.15.8                                
+    #> [18] matrixStats_0.54.0                                 
+    #> [19] Biobase_2.41.2                                     
+    #> [20] GenomicRanges_1.33.7                               
+    #> [21] GenomeInfoDb_1.17.1                                
+    #> [22] IRanges_2.15.16                                    
+    #> [23] S4Vectors_0.19.19                                  
+    #> [24] BiocGenerics_0.27.1                                
     #> 
     #> loaded via a namespace (and not attached):
     #>   [1] siggenes_1.55.0               mclust_5.4.1                 
     #>   [3] rprojroot_1.3-2               DNAcopy_1.55.0               
-    #>   [5] base64_2.0                    roxygen2_6.0.1               
-    #>   [7] bit64_0.9-7                   interactiveDisplayBase_1.18.0
-    #>   [9] AnnotationDbi_1.42.0          xml2_1.2.0                   
-    #>  [11] codetools_0.2-15              splines_3.5.0                
-    #>  [13] knitr_1.20                    Rsamtools_1.33.2             
-    #>  [15] annotate_1.59.0               shiny_1.0.5                  
-    #>  [17] HDF5Array_1.9.5               readr_1.1.1                  
+    #>   [5] base64_2.0                    bit64_0.9-7                  
+    #>   [7] interactiveDisplayBase_1.19.0 AnnotationDbi_1.43.1         
+    #>   [9] xml2_1.2.0                    codetools_0.2-15             
+    #>  [11] splines_3.5.0                 knitr_1.20                   
+    #>  [13] Rsamtools_1.33.3              annotate_1.59.1              
+    #>  [15] shiny_1.1.0                   HDF5Array_1.9.5              
+    #>  [17] BiocManager_1.30.1            readr_1.1.1                  
     #>  [19] compiler_3.5.0                httr_1.3.1                   
     #>  [21] backports_1.1.2               assertthat_0.2.0             
     #>  [23] Matrix_1.2-14                 limma_3.37.3                 
-    #>  [25] later_0.7.2                   htmltools_0.3.6              
+    #>  [25] later_0.7.3                   htmltools_0.3.6              
     #>  [27] prettyunits_1.0.2             tools_3.5.0                  
-    #>  [29] bindrcpp_0.2.2                glue_1.2.0                   
+    #>  [29] bindrcpp_0.2.2                glue_1.3.0                   
     #>  [31] GenomeInfoDbData_1.1.0        dplyr_0.7.6                  
-    #>  [33] doRNG_1.7.1                   Rcpp_0.12.16                 
+    #>  [33] doRNG_1.7.1                   Rcpp_0.12.18                 
     #>  [35] multtest_2.37.0               preprocessCore_1.43.0        
-    #>  [37] nlme_3.1-137                  ExperimentHub_1.6.0          
+    #>  [37] nlme_3.1-137                  ExperimentHub_1.7.2          
     #>  [39] rtracklayer_1.41.3            DelayedMatrixStats_1.3.4     
     #>  [41] gbRd_0.4-11                   stringr_1.3.1                
     #>  [43] mime_0.5                      rngtools_1.3.1               
-    #>  [45] devtools_1.13.6               XML_3.98-1.12                
-    #>  [47] beanplot_1.2                  AnnotationHub_2.12.0         
-    #>  [49] zlibbioc_1.27.0               MASS_7.3-50                  
-    #>  [51] BiocInstaller_1.31.1          hms_0.4.2                    
-    #>  [53] promises_1.0.1                rhdf5_2.25.4                 
-    #>  [55] GEOquery_2.49.0               RColorBrewer_1.1-2           
-    #>  [57] curl_3.2                      yaml_2.1.19                  
-    #>  [59] memoise_1.1.0                 pkgmaker_0.27                
-    #>  [61] biomaRt_2.37.3                reshape_0.8.7                
-    #>  [63] stringi_1.2.3                 RSQLite_2.1.0                
-    #>  [65] genefilter_1.63.0             desc_1.2.0                   
-    #>  [67] GenomicFeatures_1.33.0        bibtex_0.4.2                 
-    #>  [69] Rdpack_0.8-0                  rlang_0.2.0                  
-    #>  [71] pkgconfig_2.0.1               commonmark_1.5               
-    #>  [73] bitops_1.0-6                  nor1mix_1.2-3                
-    #>  [75] evaluate_0.10.1               lattice_0.20-35              
-    #>  [77] purrr_0.2.5                   Rhdf5lib_1.3.1               
-    #>  [79] bindr_0.1.1                   GenomicAlignments_1.17.2     
-    #>  [81] bit_1.1-12                    tidyselect_0.2.4             
-    #>  [83] plyr_1.8.4                    magrittr_1.5                 
-    #>  [85] R6_2.2.2                      DBI_1.0.0                    
-    #>  [87] pillar_1.3.0                  withr_2.1.2                  
-    #>  [89] survival_2.42-3               RCurl_1.95-4.11              
-    #>  [91] tibble_1.4.2                  crayon_1.3.4                 
-    #>  [93] rmarkdown_1.10                progress_1.2.0               
-    #>  [95] grid_3.5.0                    data.table_1.11.4            
-    #>  [97] blob_1.1.1                    digest_0.6.15                
-    #>  [99] xtable_1.8-2                  tidyr_0.8.1                  
-    #> [101] httpuv_1.4.1                  illuminaio_0.23.0            
-    #> [103] openssl_1.0.1                 registry_0.5                 
-    #> [105] quadprog_1.5-5
+    #>  [45] XML_3.98-1.12                 beanplot_1.2                 
+    #>  [47] AnnotationHub_2.13.1          zlibbioc_1.27.0              
+    #>  [49] MASS_7.3-50                   BiocInstaller_1.31.1         
+    #>  [51] promises_1.0.1                hms_0.4.2                    
+    #>  [53] rhdf5_2.25.4                  GEOquery_2.49.0              
+    #>  [55] RColorBrewer_1.1-2            curl_3.2                     
+    #>  [57] yaml_2.1.19                   memoise_1.1.0                
+    #>  [59] pkgmaker_0.27                 biomaRt_2.37.3               
+    #>  [61] reshape_0.8.7                 stringi_1.2.4                
+    #>  [63] RSQLite_2.1.1                 genefilter_1.63.0            
+    #>  [65] GenomicFeatures_1.33.0        bibtex_0.4.2                 
+    #>  [67] Rdpack_0.8-0                  rlang_0.2.1                  
+    #>  [69] pkgconfig_2.0.1               bitops_1.0-6                 
+    #>  [71] nor1mix_1.2-3                 evaluate_0.11                
+    #>  [73] lattice_0.20-35               purrr_0.2.5                  
+    #>  [75] Rhdf5lib_1.3.1                bindr_0.1.1                  
+    #>  [77] GenomicAlignments_1.17.3      bit_1.1-12                   
+    #>  [79] tidyselect_0.2.4              plyr_1.8.4                   
+    #>  [81] magrittr_1.5                  R6_2.2.2                     
+    #>  [83] DBI_1.0.0                     pillar_1.3.0                 
+    #>  [85] withr_2.1.2                   survival_2.42-3              
+    #>  [87] RCurl_1.95-4.11               tibble_1.4.2                 
+    #>  [89] crayon_1.3.4                  rmarkdown_1.10               
+    #>  [91] progress_1.2.0                grid_3.5.0                   
+    #>  [93] data.table_1.11.4             blob_1.1.1                   
+    #>  [95] digest_0.6.15                 xtable_1.8-2                 
+    #>  [97] tidyr_0.8.1                   httpuv_1.4.5                 
+    #>  [99] illuminaio_0.23.2             openssl_1.0.1                
+    #> [101] registry_0.5                  quadprog_1.5-5
 
 # References
 
@@ -310,6 +312,13 @@ Hansen, and RA Irizarry. 2014. “Minfi: A flexible and comprehensive
 Bioconductor package for the analysis of Infinium DNA Methylation
 microarrays.” *Bioinformatics* 30 (10): 1363–9.
 <https://doi.org/10.1093/bioinformatics/btu049>.
+
+</div>
+
+<div id="ref-minfiData">
+
+Daniel, K, M Aryee, and W Timp. 2018. *minfiData: Example data for the
+Illumina Methylation 450k array*.
 
 </div>
 
