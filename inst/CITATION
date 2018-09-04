@@ -3,5 +3,5 @@ bibentry(bibtype = 'Manual',
     key = "cnima",
     author = c(person('Moritz', 'Przybilla'), person('Xavier', 'Pastor')),
     year = "2018",
-    url = "{https://bioconductor.org/packages/release/data/experiment/html/CopyNeutralIMA.html}"
+    url = "https://bioconductor.org/packages/CopyNeutralIMA"
 )
